@@ -19,7 +19,7 @@ export class AppComponent {
   public clock;
 
   constructor(store: Store<any>) {
-    this.clock = store.select('clock')
+    this.clock = store.select('clock');
 
     Observable.merge(
       this.click$.mapTo('hour'),

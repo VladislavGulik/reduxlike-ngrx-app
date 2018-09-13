@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { clock } from '../reducers';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    StoreModule.forRoot({ clock }),
   ],
   providers: [],
   bootstrap: [AppComponent]
