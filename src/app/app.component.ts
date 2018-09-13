@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/mapTo';
+import { HOUR, SECOND } from '../reducers';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +23,9 @@ export class AppComponent {
     this.clock = store.select('clock');
 
     Observable.merge(
-      this.click$.mapTo('hour'),
-      Observable.interval(1000).mapTo('second')
-    )
-      .subscribe((type) => {
+      this.click$.mapTo(HOUR),
+      Observable.interval(1000).mapTo(SECOND)
+    ).subscribe((type) => {
         store.dispatch({ type });
       });
   }
