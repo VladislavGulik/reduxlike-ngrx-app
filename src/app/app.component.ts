@@ -4,6 +4,8 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/scan';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,12 @@ export class AppComponent {
     this.clock = Observable.merge(
       this.click$,
       Observable.interval(1000)
-    ).map(() => new Date());
+    )
+    .startWith(new Date())
+    .scan((acc, curr) => {
+      const date = new Date(acc.getTime());
+      date.setSeconds(date.getSeconds() + 1);
+      return date;
+    });
   }
 }
