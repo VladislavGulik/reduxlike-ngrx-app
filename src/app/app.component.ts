@@ -8,7 +8,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/mapTo';
-import { HOUR, SECOND, ADVANCE } from '../reducers';
+import 'rxjs/add/operator/withLatestFrom';
+import { HOUR, SECOND, ADVANCE, RECALL } from '../reducers';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,8 @@ export class AppComponent {
   public person$ = new Subject()
       .map((value) => ({ payload: value, type: ADVANCE }));
 
+  public recall$ = new Subject();
+
   public seconds$ = Observable
       .interval(1000)
       .mapTo({ type: SECOND, payload: 1 });
@@ -38,6 +41,9 @@ export class AppComponent {
       this.click$,
       this.seconds$,
       this.person$,
+      this.recall$
+        .withLatestFrom(this.time, (_, y) => y)
+        .map((time) => ({ type: RECALL, payload: time }))
       ).subscribe(store.dispatch.bind(store));
   }
 }
