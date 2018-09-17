@@ -1,7 +1,7 @@
 export const HOUR = 'HOUR';
 export const SECOND = 'SECOND';
 
-export const clock = (state = new Date(), { type, payload }) => {
+export const clock = (state = new Date(), { type, payload } = { type: '', payload: 0 }) => {
   const date = new Date(state.getTime());
   switch (type) {
     case SECOND:
@@ -16,10 +16,10 @@ export const clock = (state = new Date(), { type, payload }) => {
 };
 
 const defaultPeople = [
-  { name: 'Sarah', time: '' },
-  { name: 'John', time: '' },
-  { name: 'Nancy', time: '' },
-  { name: 'Drew', time: '' },
+  { name: 'Sarah', time: clock() },
+  { name: 'John', time: clock() },
+  { name: 'Nancy', time: clock() },
+  { name: 'Drew', time: clock() },
 ];
 export const people = (state = defaultPeople, { type, payload }) => {
   switch (type) {
