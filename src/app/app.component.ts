@@ -17,6 +17,7 @@ import { HOUR, SECOND } from '../reducers';
 })
 export class AppComponent {
   public time;
+  public people;
 
   public click$ = new Subject<string>()
       .map((value) => ({ type: HOUR, payload: parseInt(value) }));
@@ -27,6 +28,7 @@ export class AppComponent {
 
   constructor(store: Store<any>) {
     this.time = store.select('clock');
+    this.people = store.select('people');
 
     Observable.merge(
       this.click$,
